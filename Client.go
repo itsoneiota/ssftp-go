@@ -22,7 +22,7 @@ type SFTPClient interface {
 // Client is a basic SFTP client, inheriting from sftp.Client.
 // Allows us to interact with sftp without faffing about.
 type Client struct {
-	Client *sftp.Client
+	sftp.Client
 }
 
 // NewClientWithKey returns a new STPClient for the given hostname, user and key.
@@ -51,7 +51,7 @@ func newClient(host string, user string, auth ssh.AuthMethod) (*Client, error) {
 	if err != nil {
 		panic(err.Error())
 	}
-	cl := &Client{Client: msftp}
+	cl := &Client{Client: *msftp}
 	return cl, nil
 }
 
