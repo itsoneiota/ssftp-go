@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"os/user"
 
 	ssh "golang.org/x/crypto/ssh"
 
@@ -80,9 +79,7 @@ func (s *Client) WriteFile(filePath string, content []byte) error {
 }
 
 func parseKeyFromPath(p string) (key ssh.Signer, err error) {
-	usr, _ := user.Current()
-	file := usr.HomeDir + p
-	buf, err := ioutil.ReadFile(file)
+	buf, err := ioutil.ReadFile(p)
 	if err != nil {
 		return
 	}
